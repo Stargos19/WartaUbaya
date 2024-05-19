@@ -131,14 +131,14 @@ export default function Absen() {
   };
 
   return (
-    <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+    <div className="bg-stone-900 min-h-screen flex flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <img
           className="mx-auto h-20 w-auto"
           src="logo.png"
           alt="Warta Ubaya"
         />
-        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-white">
           Warta Ubaya
         </h2>
       </div>
@@ -151,7 +151,7 @@ export default function Absen() {
           <div>
             <form className="space-y-6" onSubmit={handleSubmit}>
               <div>
-                <label htmlFor="nama" className="block text-sm font-medium leading-6 text-gray-900">
+                <label htmlFor="nama" className="block text-sm font-medium leading-6 text-white">
                   Nama 
                 </label>
                 <div className="mt-2">
@@ -160,7 +160,7 @@ export default function Absen() {
                     name="nama"
                     value={selectedPerson}
                     onChange={(e) => setSelectedPerson(e.target.value)}
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                    className="block w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-stone-600 sm:max-w-xs sm:text-sm sm:leading-6"
                   >
                     <option value="" disabled>Select a person</option>
                     {people.map((person) => (
@@ -170,7 +170,7 @@ export default function Absen() {
                 </div>
               </div>
 
-              <legend className="text-sm font-semibold leading-6 text-gray-900">Divisi</legend>
+              <legend className="text-sm font-semibold leading-6 text-white">Divisi</legend>
               <div className="mt-6 space-y-6">
                 <div className="flex items-center gap-x-3">
                   <input
@@ -179,9 +179,9 @@ export default function Absen() {
                     type="radio"
                     value="Redaktur"
                     onChange={(e) => setDivisi(e.target.value)}
-                    className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                    className="h-4 w-4 border-gray-300 text-white focus:ring-stone-600"
                   />
-                  <label htmlFor="redz" className="block text-sm font-medium leading-6 text-gray-900">
+                  <label htmlFor="redz" className="block text-sm font-medium leading-6 text-white">
                     Redaktur
                   </label>
                 </div>
@@ -192,9 +192,9 @@ export default function Absen() {
                     type="radio"
                     value="Design and Layouter"
                     onChange={(e) => setDivisi(e.target.value)}
-                    className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                    className="h-4 w-4 border-gray-300 text-white focus:ring-stone-600"
                   />
-                  <label htmlFor="dl" className="block text-sm font-medium leading-6 text-gray-900">
+                  <label htmlFor="dl" className="block text-sm font-medium leading-6 text-white">
                     Design and Layouter
                   </label>
                 </div>
@@ -205,9 +205,9 @@ export default function Absen() {
                     type="radio"
                     value="Reporter"
                     onChange={(e) => setDivisi(e.target.value)}
-                    className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                    className="h-4 w-4 border-gray-300 text-white focus:ring-stone-600"
                   />
-                  <label htmlFor="re" className="block text-sm font-medium leading-6 text-gray-900">
+                  <label htmlFor="re" className="block text-sm font-medium leading-6 text-white">
                     Reporter
                   </label>
                 </div>
@@ -218,9 +218,9 @@ export default function Absen() {
                     type="radio"
                     value="Surveyor"
                     onChange={(e) => setDivisi(e.target.value)}
-                    className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                    className="h-4 w-4 border-gray-300 text-white focus:ring-stone-600"
                   />
-                  <label htmlFor="sv" className="block text-sm font-medium leading-6 text-gray-900">
+                  <label htmlFor="sv" className="block text-sm font-medium leading-6 text-white">
                     Surveyor
                   </label>
                 </div>
@@ -231,9 +231,9 @@ export default function Absen() {
                     type="radio"
                     value="Fotografer"
                     onChange={(e) => setDivisi(e.target.value)}
-                    className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                    className="h-4 w-4 border-gray-300 text-white focus:ring-stone-600"
                   />
-                  <label htmlFor="fg" className="block text-sm font-medium leading-6 text-gray-900">
+                  <label htmlFor="fg" className="block text-sm font-medium leading-6 text-white">
                     Fotografer
                   </label>
                 </div>
@@ -244,9 +244,9 @@ export default function Absen() {
                     type="radio"
                     value="Marketer"
                     onChange={(e) => setDivisi(e.target.value)}
-                    className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                    className="h-4 w-4 border-gray-300 text-white focus:ring-stone-600"
                   />
-                  <label htmlFor="ms" className="block text-sm font-medium leading-6 text-gray-900">
+                  <label htmlFor="ms" className="block text-sm font-medium leading-6 text-white">
                     Marketer
                   </label>
                 </div>
@@ -277,7 +277,7 @@ export default function Absen() {
         ) : (
           <p className="mt-10 text-center text-sm text-gray-500">
             Anda adalah Admin?{' '}
-            <a href="SignIn" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+            <a href="SignIn" className="font-semibold leading-6 text-white hover:text-indigo-500">
               Klik Di sini
             </a>
           </p>
