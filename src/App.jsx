@@ -1,5 +1,5 @@
 import { useState, useEffect} from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import './firebase';
 import { getAuth, onAuthStateChanged } from "firebase/auth"
 import Absen from "./pages/absen";
@@ -37,9 +37,8 @@ const [loading, setLoading] = useState(true)
     <>     
       {isLogin ? (
         <Routes>
-          <Route path="/absen/*" element={<Absen />} />
           <Route path="/history" element={<History />} />
-          <Route path="*" element={<Navigate to="/absen/" replace />} />
+          <Route path="*" element={<Absen />} />
         </Routes>
       ) : (
         <Routes>

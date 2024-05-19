@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getFirestore, collection, getDocs, updateDoc, doc, serverTimestamp, getDoc } from 'firebase/firestore';
+import { getAuth, signOut } from 'firebase/auth'; // Tambahkan import untuk auth
+import { Link } from 'react-router-dom';
 
 // Komponen Modal
 function Modal({ message, type, onClose }) {
@@ -44,7 +46,9 @@ export default function Absen() {
   const [modalOpen, setModalOpen] = useState(false); // State untuk kontrol modal
   const [modalMessage, setModalMessage] = useState('');
   const [modalType, setModalType] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // State untuk mengelola status login
   const db = getFirestore();
+  const auth = getAuth();
 
   useEffect(() => {
     const fetchPeople = async () => {
@@ -55,6 +59,13 @@ export default function Absen() {
 
     fetchPeople();
   }, [db]);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      setIsLoggedIn(!!user);
+    });
+    return () => unsubscribe();
+  }, [auth]);
 
   const handleCloseModal = () => {
     setModalOpen(false);
@@ -110,13 +121,22 @@ export default function Absen() {
     setModalOpen(true); // Buka modal setelah operasi selesai
   };
 
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      setIsLoggedIn(false);
+    } catch (error) {
+      console.error("Error logging out: ", error);
+    }
+  };
+
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <img
           className="mx-auto h-20 w-auto"
           src="logo.png"
-          alt="Your Company"
+          alt="Warta Ubaya"
         />
         <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
           Warta Ubaya
@@ -127,118 +147,141 @@ export default function Absen() {
         {modalOpen && (
           <Modal message={modalMessage} type={modalType} onClose={handleCloseModal} />
         )}
-        <form className="space-y-6" onSubmit={handleSubmit}>
+        
           <div>
-            <label htmlFor="nama" className="block text-sm font-medium leading-6 text-gray-900">
-              Nama 
-            </label>
-            <div className="mt-2">
-              <select
-                id="nama"
-                name="nama"
-                value={selectedPerson}
-                onChange={(e) => setSelectedPerson(e.target.value)}
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+            <form className="space-y-6" onSubmit={handleSubmit}>
+              <div>
+                <label htmlFor="nama" className="block text-sm font-medium leading-6 text-gray-900">
+                  Nama 
+                </label>
+                <div className="mt-2">
+                  <select
+                    id="nama"
+                    name="nama"
+                    value={selectedPerson}
+                    onChange={(e) => setSelectedPerson(e.target.value)}
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                  >
+                    <option value="" disabled>Select a person</option>
+                    {people.map((person) => (
+                      <option key={person.id} value={person.id}>{person.nama}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <legend className="text-sm font-semibold leading-6 text-gray-900">Divisi</legend>
+              <div className="mt-6 space-y-6">
+                <div className="flex items-center gap-x-3">
+                  <input
+                    id="redz"
+                    name="divisi"
+                    type="radio"
+                    value="Redaktur"
+                    onChange={(e) => setDivisi(e.target.value)}
+                    className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                  />
+                  <label htmlFor="redz" className="block text-sm font-medium leading-6 text-gray-900">
+                    Redaktur
+                  </label>
+                </div>
+                <div className="flex items-center gap-x-3">
+                  <input
+                    id="dl"
+                    name="divisi"
+                    type="radio"
+                    value="Design and Layouter"
+                    onChange={(e) => setDivisi(e.target.value)}
+                    className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                  />
+                  <label htmlFor="dl" className="block text-sm font-medium leading-6 text-gray-900">
+                    Design and Layouter
+                  </label>
+                </div>
+                <div className="flex items-center gap-x-3">
+                  <input
+                    id="re"
+                    name="divisi"
+                    type="radio"
+                    value="Reporter"
+                    onChange={(e) => setDivisi(e.target.value)}
+                    className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                  />
+                  <label htmlFor="re" className="block text-sm font-medium leading-6 text-gray-900">
+                    Reporter
+                  </label>
+                </div>
+                <div className="flex items-center gap-x-3">
+                  <input
+                    id="sv"
+                    name="divisi"
+                    type="radio"
+                    value="Surveyor"
+                    onChange={(e) => setDivisi(e.target.value)}
+                    className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                  />
+                  <label htmlFor="sv" className="block text-sm font-medium leading-6 text-gray-900">
+                    Surveyor
+                  </label>
+                </div>
+                <div className="flex items-center gap-x-3">
+                  <input
+                    id="fg"
+                    name="divisi"
+                    type="radio"
+                    value="Fotografer"
+                    onChange={(e) => setDivisi(e.target.value)}
+                    className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                  />
+                  <label htmlFor="fg" className="block text-sm font-medium leading-6 text-gray-900">
+                    Fotografer
+                  </label>
+                </div>
+                <div className="flex items-center gap-x-3">
+                  <input
+                    id="ms"
+                    name="divisi"
+                    type="radio"
+                    value="Marketer"
+                    onChange={(e) => setDivisi(e.target.value)}
+                    className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                  />
+                  <label htmlFor="ms" className="block text-sm font-medium leading-6 text-gray-900">
+                    Marketer
+                  </label>
+                </div>
+              </div>
+
+              <div>
+                <button
+                  type="submit"
+                  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >
+                  Absen
+                </button>
+              </div>
+            </form>
+          </div>
+          {isLoggedIn ? (
+            <div className="mt-4">
+              <button 
+                onClick={handleLogout} 
+                className="flex w-full justify-center rounded-md bg-red-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500"
               >
-                <option value="" disabled>Select a person</option>
-                {people.map((person) => (
-                  <option key={person.id} value={person.id}>{person.nama}</option>
-                ))}
-              </select>
+                Logout
+              </button>
+              <Link to="/history" className="mt-2 flex w-full justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-500">
+                Lihat History
+              </Link>
             </div>
-          </div>
-
-          <legend className="text-sm font-semibold leading-6 text-gray-900">Divisi</legend>
-          <div className="mt-6 space-y-6">
-            <div className="flex items-center gap-x-3">
-              <input
-                id="redz"
-                name="divisi"
-                type="radio"
-                value="Redaktur"
-                onChange={(e) => setDivisi(e.target.value)}
-                className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
-              />
-              <label htmlFor="redz" className="block text-sm font-medium leading-6 text-gray-900">
-                Redaktur
-              </label>
-            </div>
-            <div className="flex items-center gap-x-3">
-              <input
-                id="dl"
-                name="divisi"
-                type="radio"
-                value="Design and Layouter"
-                onChange={(e) => setDivisi(e.target.value)}
-                className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
-              />
-              <label htmlFor="dl" className="block text-sm font-medium leading-6 text-gray-900">
-                Design and Layouter
-              </label>
-            </div>
-            <div className="flex items-center gap-x-3">
-              <input
-                id="re"
-                name="divisi"
-                type="radio"
-                value="Reporter"
-                onChange={(e) => setDivisi(e.target.value)}
-                className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
-              />
-              <label htmlFor="re" className="block text-sm font-medium leading-6 text-gray-900">
-                Reporter
-              </label>
-            </div>
-            <div className="flex items-center gap-x-3">
-              <input
-                id="sv"
-                name="divisi"
-                type="radio"
-                value="Surveyor"
-                onChange={(e) => setDivisi(e.target.value)}
-                className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
-              />
-              <label htmlFor="sv" className="block text-sm font-medium leading-6 text-gray-900">
-                Surveyor
-              </label>
-            </div>
-            <div className="flex items-center gap-x-3">
-              <input
-                id="fg"
-                name="divisi"
-                type="radio"
-                value="Fotografer"
-                onChange={(e) => setDivisi(e.target.value)}
-                className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
-              />
-              <label htmlFor="fg" className="block text-sm font-medium leading-6 text-gray-900">
-                Fotografer
-              </label>
-            </div>
-            <div className="flex items-center gap-x-3">
-              <input
-                id="ms"
-                name="divisi"
-                type="radio"
-                value="Marketer"
-                onChange={(e) => setDivisi(e.target.value)}
-                className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
-              />
-              <label htmlFor="ms" className="block text-sm font-medium leading-6 text-gray-900">
-                Marketer
-              </label>
-            </div>
-          </div>
-
-          <div>
-            <button
-              type="submit"
-              className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
-              Absen
-            </button>
-          </div>
-        </form>
+        ) : (
+          <p className="mt-10 text-center text-sm text-gray-500">
+            Anda adalah Admin?{' '}
+            <a href="SignIn" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+              Klik Di sini
+            </a>
+          </p>
+        )}
       </div>
     </div>
   );
