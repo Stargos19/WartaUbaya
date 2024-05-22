@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { getDatabase, ref, get, update, set, onValue } from 'firebase/database';
 import { getAuth, signOut } from 'firebase/auth';
 import DataWartaUbayaGen40 from '../data/DataWartaUbayaGen40.json';
 import { Link } from 'react-router-dom';
@@ -48,7 +47,6 @@ export default function Absen() {
   const [modalMessage, setModalMessage] = useState('');
   const [modalType, setModalType] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false); // State untuk mengelola status login
-  const db = getDatabase();
   const auth = getAuth();
 
   useEffect(() => {
@@ -95,6 +93,7 @@ export default function Absen() {
       return person;
     });
     setPeople(updatedPeople);
+    localStorage.setItem('DataWartaUbayaGen40', JSON.stringify(updatedPeople));
 
     setModalMessage("Data updated successfully with jamMasuk and jamKeluar");
     setModalType("success");

@@ -4,223 +4,287 @@
   "inisial": "DLL",
   "divisi": "Pimpinan Redaksi",
   "fakultas": "Teknik",
-  "nrp": 160821024
+  "nrp": 160821024,
+  "jamMasuk": null,
+  "jamKeluar": null
  },
  {
   "nama": "Caithlene Angelique Gunawan",
   "inisial": "KET",
   "divisi": "Redaktur Pelaksana",
   "fakultas": "Psikologi",
-  "nrp": 150122137
+  "nrp": 150122137,
+  "jamMasuk": null,
+  "jamKeluar": null
  },
  {
   "nama": "Jennifer Vania Claresta",
   "inisial": "JV",
   "divisi": "Sekretaris Redaksi",
   "fakultas": "Psikologi",
-  "nrp": 150121111
+  "nrp": 150121111,
+  "jamMasuk": null,
+  "jamKeluar": null
  },
  {
   "nama": "Najwa Azzahra Muhyi",
   "inisial": "NJ",
   "divisi": "Redaktur Newsletter",
   "fakultas": "Psikologi",
-  "nrp": 150122233
+  "nrp": 150122233,
+  "jamMasuk": null,
+  "jamKeluar": null
  },
  {
   "nama": "Wielmiano Hugo Mario Avande",
   "inisial": "SGO",
   "divisi": "Redaktur Gerbang",
   "fakultas": "Teknik",
-  "nrp": 160422112
+  "nrp": 160422112,
+  "jamMasuk": null,
+  "jamKeluar": null
  },
  {
   "nama": "Stivent Nathaniel Riwulaky",
   "inisial": "COL",
   "divisi": "Redaktur Desain-Layouter",
   "fakultas": "Teknik",
-  "nrp": 160422022
+  "nrp": 160422022,
+  "jamMasuk": null,
+  "jamKeluar": null
  },
  {
   "nama": "Ishika Marsha Devanda",
   "inisial": "VND",
   "divisi": "Redaktur Fotografi",
   "fakultas": "Psikologi",
-  "nrp": 150121018
+  "nrp": 150121018,
+  "jamMasuk": null,
+  "jamKeluar": null
  },
  {
   "nama": "Monica Lavender",
   "inisial": "MON",
   "divisi": "Redaktur Online",
   "fakultas": "Psikologi",
-  "nrp": 150121026
+  "nrp": 150121026,
+  "jamMasuk": null,
+  "jamKeluar": null
  },
  {
   "nama": "Nisrina Putri Tsania",
   "inisial": "SXN",
   "divisi": "RnD",
   "fakultas": "Farmasi",
-  "nrp": 110121200
+  "nrp": 110121200,
+  "jamMasuk": null,
+  "jamKeluar": null
  },
  {
   "nama": "Stevie Thio",
   "inisial": "VIE",
   "divisi": "Koordinator Marketer",
   "fakultas": "Hukum",
-  "nrp": 120122023
+  "nrp": 120122023,
+  "jamMasuk": null,
+  "jamKeluar": null
  },
  {
   "nama": "Putri Mustika Shofia",
   "inisial": "FIA",
   "divisi": "Anggota Divisi Reporter",
   "fakultas": "Psikologi",
-  "nrp": 150122180
+  "nrp": 150122180,
+  "jamMasuk": null,
+  "jamKeluar": null
  },
  {
   "nama": "Ni Wayan Ary Suci",
   "inisial": "CIK",
   "divisi": "Anggota Divisi Reporter",
   "fakultas": "Industri Kreatif",
-  "nrp": 180223022
+  "nrp": 180223022,
+  "jamMasuk": null,
+  "jamKeluar": null
  },
  {
   "nama": "Bagas Habib Wardana",
   "inisial": "BHW",
   "divisi": "Anggota Divisi Reporter",
   "fakultas": "Teknik",
-  "nrp": 160222026
+  "nrp": 160222026,
+  "jamMasuk": null,
+  "jamKeluar": null
  },
  {
   "nama": "Angela Ivana Putri",
   "inisial": "JEL",
   "divisi": "Anggota Divisi Fotografer",
   "fakultas": "Psikologi",
-  "nrp": 150121174
+  "nrp": 150121174,
+  "jamMasuk": null,
+  "jamKeluar": null
  },
  {
   "nama": "Vania Aurellia Ramadhina",
   "inisial": "VJ",
   "divisi": "Anggota Divisi Fotografer",
   "fakultas": "Psikologi",
-  "nrp": 150122205
+  "nrp": 150122205,
+  "jamMasuk": null,
+  "jamKeluar": null
  },
  {
   "nama": "Richelle Aurelia Desyntha Samudra",
   "inisial": "RCH",
   "divisi": "Anggota Divisi Fotografer",
   "fakultas": "Hukum",
-  "nrp": 120123184
+  "nrp": 120123184,
+  "jamMasuk": null,
+  "jamKeluar": null
  },
  {
   "nama": "Natalya Grasyela Claudyna",
   "inisial": "NAT",
   "divisi": "Anggota Divisi Fotografer",
   "fakultas": "Bisnis dan Ekonomika",
-  "nrp": 130323018
+  "nrp": 130323018,
+  "jamMasuk": null,
+  "jamKeluar": null
  },
  {
   "nama": "Angelline Clara Fongiman",
   "inisial": "AF",
   "divisi": "Anggota Divisi Fotografer",
   "fakultas": "Teknik",
-  "nrp": 160423137
+  "nrp": 160423137,
+  "jamMasuk": null,
+  "jamKeluar": null
  },
  {
   "nama": "Aileen Averina Lau",
   "inisial": "AVE",
   "divisi": "Anggota Divisi Desain & Layouter",
   "fakultas": "Teknik",
-  "nrp": 160423011
+  "nrp": 160423011,
+  "jamMasuk": null,
+  "jamKeluar": null
  },
  {
   "nama": "Reinaldy Aubre Antonio",
   "inisial": "SOS",
   "divisi": "Anggota Divisi Desain & Layouter",
   "fakultas": "Teknik",
-  "nrp": 160423113
+  "nrp": 160423113,
+  "jamMasuk": null,
+  "jamKeluar": null
  },
  {
   "nama": "Graciella Sandrinha Fernandes",
   "inisial": "GSF",
   "divisi": "Anggota Divisi Desain & Layouter",
   "fakultas": "Psikologi",
-  "nrp": 150123177
+  "nrp": 150123177,
+  "jamMasuk": null,
+  "jamKeluar": null
  },
  {
   "nama": "Evie Siandayani",
   "inisial": "PAI",
   "divisi": "Anggota Divisi Desain & Layouter",
   "fakultas": "Industri Kreatif",
-  "nrp": 180123031
+  "nrp": 180123031,
+  "jamMasuk": null,
+  "jamKeluar": null
  },
  {
   "nama": "Selena Hans",
   "inisial": "SLN",
   "divisi": "Anggota Divisi Desain & Layouter",
   "fakultas": "Teknik",
-  "nrp": 160423025
+  "nrp": 160423025,
+  "jamMasuk": null,
+  "jamKeluar": null
  },
  {
   "nama": "Fiona Kathleen",
   "inisial": "PYO",
   "divisi": "Anggota Divisi Desain & Layouter",
   "fakultas": "Teknik",
-  "nrp": 160423151
+  "nrp": 160423151,
+  "jamMasuk": null,
+  "jamKeluar": null
  },
  {
   "nama": "Nadya Kiara Cathlina Liady",
   "inisial": "NCL",
   "divisi": "Anggota Divisi Surveyor",
   "fakultas": "Psikologi",
-  "nrp": 150123048
+  "nrp": 150123048,
+  "jamMasuk": null,
+  "jamKeluar": null
  },
  {
   "nama": "Flora Angel Devina Primata",
   "inisial": "FLA",
   "divisi": "Anggota Divisi Surveyor",
   "fakultas": "Bisnis dan Ekonomika",
-  "nrp": 130323067
+  "nrp": 130323067,
+  "jamMasuk": null,
+  "jamKeluar": null
  },
  {
   "nama": "Cyeliz Zipora Sulistyo",
   "inisial": "LIZ",
   "divisi": "Anggota Divisi Surveyor",
   "fakultas": "Hukum",
-  "nrp": 120123164
+  "nrp": 120123164,
+  "jamMasuk": null,
+  "jamKeluar": null
  },
  {
   "nama": "Friska Putri Audelia",
   "inisial": "FIS",
   "divisi": "Anggota Divisi Marketer",
   "fakultas": "Hukum",
-  "nrp": 120122040
+  "nrp": 120122040,
+  "jamMasuk": null,
+  "jamKeluar": null
  },
  {
   "nama": "Joseph Xela Wirasena Pangau",
   "inisial": "XEL",
   "divisi": "Anggota Divisi Marketer",
   "fakultas": "Teknik",
-  "nrp": 160423211
+  "nrp": 160423211,
+  "jamMasuk": null,
+  "jamKeluar": null
  },
  {
   "nama": "Alifania Rizka Cahyarani",
   "inisial": "NYA",
   "divisi": "Anggota Divisi Marketer",
   "fakultas": "Farmasi",
-  "nrp": 110122218
+  "nrp": 110122218,
+  "jamMasuk": null,
+  "jamKeluar": null
  },
  {
   "nama": "Karina Azwa Z",
   "inisial": "KAZ",
   "divisi": "Anggota Divisi Marketer",
   "fakultas": "Psikologi",
-  "nrp": 150122253
+  "nrp": 150122253,
+  "jamMasuk": null,
+  "jamKeluar": null
  },
  {
   "nama": "Fransiska Yunita Da Costa",
   "inisial": "SCA",
   "divisi": "Anggota Divisi Marketer",
   "fakultas": "Psikologi",
-  "nrp": 150122246
+  "nrp": 150122246,
+  "jamMasuk": null,
+  "jamKeluar": null
  }
 ]
