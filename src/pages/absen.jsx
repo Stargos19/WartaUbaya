@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { getFirestore, collection, getDocs, updateDoc, doc, serverTimestamp, getDoc } from 'firebase/firestore';
-import { getAuth, signOut } from 'firebase/auth'; // Tambahkan import untuk auth
+import { getDatabase, ref, get, update, set, onValue } from 'firebase/database';
+import { getAuth, signOut } from 'firebase/auth';
+import DataWartaUbayaGen40 from '../data/DataWartaUbayaGen40.json';
 import { Link } from 'react-router-dom';
 
 // Komponen Modal
@@ -47,18 +48,20 @@ export default function Absen() {
   const [modalMessage, setModalMessage] = useState('');
   const [modalType, setModalType] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false); // State untuk mengelola status login
-  const db = getFirestore();
+  const db = getDatabase();
   const auth = getAuth();
 
   useEffect(() => {
-    const fetchPeople = async () => {
-      const querySnapshot = await getDocs(collection(db, 'anggota'));
-      const peopleData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      setPeople(peopleData);
+    const fetchData = () => {
+      const loadedPeople = DataWartaUbayaGen40.map((item, index) => ({
+        id: index,
+        ...item
+      }));
+      setPeople(loadedPeople);
     };
 
-    fetchPeople();
-  }, [db]);
+    fetchData();
+  }, []);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
@@ -80,54 +83,31 @@ export default function Absen() {
       setModalOpen(true); // Buka modal
       return;
     }
-
-    try {
-      const personRef = doc(db, 'anggota', selectedPerson);
-      const personDoc = await getDoc(personRef);
-
-      if (personDoc.exists()) {
-        const personData = personDoc.data();
-        const now = new Date();
-        const today = now.toISOString().split('T')[0];
-        const jamMasukDate = personData.jamMasuk ? personData.jamMasuk.toDate() : null;
-        const jamMasukDay = jamMasukDate ? jamMasukDate.toISOString().split('T')[0] : null;
-
-        if (jamMasukDay === today) {
-          // Jika sudah ada jamMasuk untuk hari ini, perbarui jamKeluar
-          await updateDoc(personRef, {
-            jamKeluar: serverTimestamp(),
-          });
-          setModalMessage("Terimakasih sudah berkunjung ke Mabes!");
-          setModalType("success");
-        } else {
-          // Jika belum ada jamMasuk untuk hari ini, perbarui jamMasuk
-          await updateDoc(personRef, {
-            jamMasuk: serverTimestamp(),
-            jamKeluar: null,
-          });
-          setModalMessage("Jaga kebersihan di dalam mabes ya!");
-          setModalType("success");
-        }
-      } else {
-        console.log("No such document!");
-        setModalMessage("No such document!");
-        setModalType("error");
+    const now = new Date();
+    const updatedPeople = people.map((person) => {
+      if (person.nama === selectedPerson) {
+        return {
+          ...person,
+          jamMasuk: now.toISOString(), // Tambahkan waktu masuk
+          jamKeluar: null, // Set jam keluar awalnya ke null
+        };
       }
-    } catch (error) {
-      console.error("Error updating document: ", error);
-      setModalMessage("Error updating document");
-      setModalType("error");
-    }
-    setModalOpen(true); // Buka modal setelah operasi selesai
-  };
+      return person;
+    });
+    setPeople(updatedPeople);
 
-  const handleLogout = async () => {
-    try {
-      await signOut(auth);
-      setIsLoggedIn(false);
-    } catch (error) {
-      console.error("Error logging out: ", error);
-    }
+    setModalMessage("Data updated successfully with jamMasuk and jamKeluar");
+    setModalType("success");
+    setModalOpen(true); // Buka modal
+    };
+
+    const handleLogout = async () => {
+      try {
+        await signOut(auth);
+        setIsLoggedIn(false);
+      } catch (error) {
+        console.error("Error logging out: ", error);
+      }
   };
 
   return (
@@ -164,7 +144,7 @@ export default function Absen() {
                   >
                     <option value="" disabled>Select a person</option>
                     {people.map((person) => (
-                      <option key={person.id} value={person.id}>{person.nama}</option>
+                      <option key={person.nama} value={person.nama}>{person.nama}</option>
                     ))}
                   </select>
                 </div>
@@ -286,3 +266,4 @@ export default function Absen() {
     </div>
   );
 }
+

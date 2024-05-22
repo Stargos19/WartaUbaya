@@ -1,42 +1,73 @@
 import { useState, useEffect } from 'react';
-import { collection, getDocs, getFirestore } from 'firebase/firestore';
+import { getDatabase, ref, get, update, child } from 'firebase/database';
 
 export default function History() {
-  const db = getFirestore();
-  const anggotaWarta = collection(db, 'anggota');
+  const db = getDatabase();
   const [people, setPeople] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
-      const querySnapshot = await getDocs(anggotaWarta);
-      const peopleData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      setPeople(peopleData);
+      const dbRef = ref(db, 'anggota');
+      const snapshot = await get(dbRef);
+      if (snapshot.exists()) {
+        const peopleData = [];
+        snapshot.forEach(childSnapshot => {
+          peopleData.push({ id: childSnapshot.key, ...childSnapshot.val() });
+        });
+        setPeople(peopleData);
+        
+      } else {
+        console.log("No data available");
+      }
     };
 
     fetchData();
-  }, [anggotaWarta]);
+  }, []);
 
-  const calculateTimeDifference = (jamMasuk, jamKeluar) => {
-    const timeDifference = jamKeluar - jamMasuk;
-    const hoursDifference = timeDifference / (1000 * 60 * 60);
-    return hoursDifference;
+  const resetAllTimes = async () => {
+    const updates = {};
+    people.forEach(person => {
+      const path = `anggota/${person.id}`;
+      updates[`${path}/jamMasuk`] = null;
+      updates[`${path}/jamKeluar`] = null;
+    });
+
+    await update(ref(db), updates);
+    console.log('All times have been reset.');
+    setShowModal(false); // Close modal after reset
   };
 
-  const getMessage = (jamMasuk, jamKeluar) => {
-    const hoursDifference = calculateTimeDifference(jamMasuk, jamKeluar);
-    if (hoursDifference >= 2) {
-      return "Sudah 2 jam di mabes";
-    } else {
-      const remainingHours = 2 - hoursDifference;
-      return `Kurang ${remainingHours.toFixed(2)} jam di mabes`;
-    }
+  const handleOpenModal = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
   };
 
   return (
     <div className="bg-stone-900 min-h-screen flex flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+      <button onClick={handleOpenModal} className="mb-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        Reset semua jam
+      </button>
+      {showModal && (
+        <div className="absolute top-0 left-0 right-0 bottom-0 bg-black bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white p-4 rounded-lg">
+            <h2>Konfirmasi Reset</h2>
+            <p>Apakah anda yakin ingin mereset semua jam anak - anak?</p>
+            <button onClick={resetAllTimes} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2">
+              Saya yakin
+            </button>
+            <button onClick={handleCloseModal} className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
       <ul role="list" className="divide-y divide-gray-100">
         {people.map((person) => (
-          <li key={person.email} className="flex justify-between gap-x-6 py-5">
+          <li key={person.id} className="flex justify-between gap-x-6 py-5">
             <div className="flex min-w-0 gap-x-4">
               <div className="min-w-0 flex-auto">
                 <p className="text-sm font-semibold leading-6 text-white">{person.nama}</p>
